@@ -53,6 +53,13 @@ public class Archiver {
             }
         }
 
+        if (filePaths.size() == 1) {
+
+            if (!Files.isRegularFile(filePaths.get(0))) {
+                filePaths.remove(0);
+            }
+        }
+
         // запись в архив
         // проверка на пустой список файлов
         if (filePaths.size() != 0) {
@@ -82,7 +89,6 @@ public class Archiver {
                 // считываем содержимое файла в массив byte
                 byte[] buffer = new byte[getBufferSize(fis.available())];
 
-                System.out.println(getBufferSize(fis.available()));
                 int length;
                 while((length = fis.read(buffer)) != -1) {
 
