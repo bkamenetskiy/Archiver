@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <name>file-config</name>
+    <paths>
+        <sourcefolders>
+            <sourcefolder path="d:\" />
+        </sourcefolders>
+        <resultfolders>
+            <resultfolder path="d:\Result" />
+        </resultfolders>
+    </paths>
+</config>
