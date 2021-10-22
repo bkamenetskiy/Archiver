@@ -81,7 +81,7 @@ public class Archiver {
                 // считываем содержимое файла в массив byte
                 byte[] buffer = new byte[getBufferSize(fis.available())];
 
-                System.out.println(getBufferSize(fis.available()));
+                //System.out.println(getBufferSize(fis.available()));
                 int length;
                 while((length = fis.read(buffer)) != -1) {
 
