@@ -24,8 +24,8 @@ public class Archiver {
         Path outputPath = Paths.get(resultPath);
 
         // название папки с архивом
-        //String newDir = "2021-10-19 HH-mm";                                                                           // на работе нет возможности соединиться с сервером времени
-        String newDir = getTime();
+        String newDir = "2021-10-19 HH-mm";                                                                           // на работе нет возможности соединиться с сервером времени
+        //String newDir = getTime();
 
         // абсолютный путь к папке в которой будет храниться архив
         Path zipFolderPath = Paths.get(outputPath + "\\" + newDir + "\\");
@@ -42,21 +42,13 @@ public class Archiver {
         }
 
         // кто вы, мистер Ansys.Products.2021.R2.Win64-SSQ, папка или файл?
-        if (filePaths.size() >= 1) {
 
-            for (int i = 0; i <= filePaths.size() - 1; i++) {
+        for (int i = 0; i <= filePaths.size() - 1; i++) {
 
-                if (!Files.isRegularFile(filePaths.get(i))) {
+            if (!Files.isRegularFile(filePaths.get(i))) {
 
-                    filePaths.remove(i);
-                }
-            }
-        }
-
-        if (filePaths.size() == 1) {
-
-            if (!Files.isRegularFile(filePaths.get(0))) {
-                filePaths.remove(0);
+                filePaths.remove(i);
+                i --;
             }
         }
 
@@ -89,6 +81,7 @@ public class Archiver {
                 // считываем содержимое файла в массив byte
                 byte[] buffer = new byte[getBufferSize(fis.available())];
 
+                System.out.println(getBufferSize(fis.available()));
                 int length;
                 while((length = fis.read(buffer)) != -1) {
 
