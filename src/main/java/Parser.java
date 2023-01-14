@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    protected void getPath (ArrayList<String> sourcePaths, ArrayList<String> resultPaths, String xmlPath) throws ParserConfigurationException, IOException, SAXException {
+    protected void getPath (String sourcePaths, String resultPaths, String xmlPath) throws ParserConfigurationException, IOException, SAXException {
 
-        sourcePaths.clear();
+        //sourcePaths.clear();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(new File(xmlPath));
@@ -33,7 +33,8 @@ public class Parser {
             NamedNodeMap attributes = path.getAttributes();
 
             // Добавление пути
-            sourcePaths.add(attributes.getNamedItem("path").getNodeValue());
+            sourcePaths = attributes.getNamedItem("path").getNodeValue();
+
         }
 
         // пути к результатам
@@ -45,7 +46,7 @@ public class Parser {
             NamedNodeMap attributes1 = path.getAttributes();
 
             // Добавление пути
-            resultPaths.add(attributes1.getNamedItem("path").getNodeValue());
+            resultPaths = attributes1.getNamedItem("path").getNodeValue();
         }
         // решение не изящное, но задача маленькая и нет смысла писать обработчик в общем виде
 

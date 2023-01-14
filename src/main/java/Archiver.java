@@ -15,7 +15,7 @@ import java.util.zip.ZipOutputStream;
 
 public class Archiver {
 
-    protected void toArchive (String fileName, String filter, String sourcePath, String resultPath, int setLevel) throws IOException {
+    protected void toArchive (String fileName, String filter, String sourcePath, String resultPath, int setLevel, String newDir) throws IOException {
 
         // хранилище путей к исходным данным
         ArrayList<Path> filePaths = new ArrayList();
@@ -24,7 +24,7 @@ public class Archiver {
         Path outputPath = Paths.get(resultPath);
 
         // название папки с архивом
-        String newDir = "2021-10-19 HH-mm";                                                                           // на работе нет возможности соединиться с сервером времени
+        // String newDir = "2021-10-19 HH-mm";
         //String newDir = getTime();
 
         // абсолютный путь к папке в которой будет храниться архив
@@ -41,10 +41,11 @@ public class Archiver {
             filePaths.add(temp);
         }
 
-        // кто вы, мистер Ansys.Products.2021.R2.Win64-SSQ, папка или файл?
+        // что ты такое, Ansys.Products.2021.R2.Win64-SSQ, папка или файл?
 
         for (int i = 0; i <= filePaths.size() - 1; i++) {
 
+            // если не файл, то удалить из списка
             if (!Files.isRegularFile(filePaths.get(i))) {
 
                 filePaths.remove(i);
@@ -78,7 +79,7 @@ public class Archiver {
                 ZipEntry zipEntry = new ZipEntry(file.getFileName().toString());
                 zipOut.putNextEntry(zipEntry);
 
-                // считываем содержимое файла в массив byte
+                // считываем файл в массив byte
                 byte[] buffer = new byte[getBufferSize(fis.available())];
 
                 //System.out.println(getBufferSize(fis.available()));
@@ -107,32 +108,6 @@ public class Archiver {
             System.out.println("Archive " + fileName + " not created. The folder is empty or there are no matching files.");
             System.out.println();
         }
-    }
-
-    private String getTime () throws IOException {
-
-        // Протокол обмена – NTP. Если трактовать шаблон времени из задания как чч.мм, то погрешность в 1 – 1,5 сек. приемлема для решения поставленной задачи.
-        // При этом протокол NTP дает значительно меньшую погрешность.
-        // Сервер – случайная коллекция из национальной зоны (ru).
-        // Благодаря чему можно снизить погрешность, связанную с латентностью сети.
-
-        // адрес сервера времени
-        String TIME_SERVER = "0.ru.pool.ntp.org";
-        //String TIME_SERVER = "0.time-a.nist.gov";
-        NTPUDPClient timeClient = new NTPUDPClient();
-
-        // время ожидания отклика, мс
-        timeClient.setDefaultTimeout(10_000);
-        InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
-        TimeInfo timeInfo = timeClient.getTime(inetAddress);
-        long returnTime = timeInfo.getMessage().getTransmitTimeStamp().getTime();
-        Date time = new Date(returnTime);
-
-        // шаблон
-        String pattern = "yyyy-MM-dd HH-mm";
-
-        String timePattern = new SimpleDateFormat(pattern).format(time);
-        return timePattern;
     }
 
     // размер буфера в зависимости от размера файла
