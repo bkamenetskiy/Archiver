@@ -8,7 +8,7 @@ import java.net.URL;
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main (String[] args) throws IOException {
 
         // хранилище путей к исходным данным
         String sourcePaths;
