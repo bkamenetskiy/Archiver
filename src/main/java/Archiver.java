@@ -23,10 +23,6 @@ public class Archiver {
         Path inputPath = Paths.get(sourcePath);
         Path outputPath = Paths.get(resultPath);
 
-        // название папки с архивом
-        // String newDir = "2021-10-19 HH-mm";
-        //String newDir = getTime();
-
         // абсолютный путь к папке в которой будет храниться архив
         Path zipFolderPath = Paths.get(outputPath + "\\" + newDir + "\\");
         // абсолютный путь к архиву
