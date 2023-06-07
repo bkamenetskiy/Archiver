@@ -1,0 +1,14 @@
+{
+  "sourcePaths" : ["d:\\"],
+  "resultPaths" : "d:\\Result",
+  "filter" : [{
+    "regularExpressions" : "[a-mA-M]*.*",
+    "fileName" : "am.zip"
+  },{
+    "regularExpressions" : "[n-zN-Z]*.*",
+    "fileName" : "nz.zip"
+  },{
+    "regularExpressions" : "[0-9][0-9][0-9][0-9]*.*",
+    "fileName" : "digit.zip"
+  }]
+}

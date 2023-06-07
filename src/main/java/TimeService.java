@@ -28,7 +28,7 @@ public class TimeService  {
         Date time = new Date(returnTime);
 
         // шаблон
-        String pattern = "yyyy-MM-dd HH-mm";
+        String pattern = "yyyy-MM-dd HH-mm-ss";
         String timePattern = new SimpleDateFormat(pattern).format(time);
 
         return timePattern;
