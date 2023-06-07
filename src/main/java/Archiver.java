@@ -17,15 +17,11 @@ public class Archiver {
 
     protected void toArchive (String fileName, String filter, String sourcePath, String resultPath, int setLevel, String newDir) throws IOException {
 
-        // хранилище путей к исходным данным
+        // хранилище путей к архивируемым файлам
         ArrayList<Path> filePaths = new ArrayList();
 
         Path inputPath = Paths.get(sourcePath);
         Path outputPath = Paths.get(resultPath);
-
-        // название папки с архивом
-        // String newDir = "2021-10-19 HH-mm";
-        //String newDir = getTime();
 
         // абсолютный путь к папке в которой будет храниться архив
         Path zipFolderPath = Paths.get(outputPath + "\\" + newDir + "\\");
