@@ -1,14 +1,20 @@
 {
   "sourcePaths" : ["d:\\"],
   "resultPaths" : "d:\\Result",
-  "filter" : [{
-    "regularExpressions" : "[a-mA-M]*.*",
+  "sourcePathsArray" :
+  [{
+    "path" : "d:\\",
+    "name" : "логи"
+  }],
+  "filters" :
+  [{
+    "regularExpression" : "[a-mA-M]*.*",
     "fileName" : "am.zip"
   },{
-    "regularExpressions" : "[n-zN-Z]*.*",
+    "regularExpression" : "[n-zN-Z]*.*",
     "fileName" : "nz.zip"
   },{
-    "regularExpressions" : "[0-9][0-9][0-9][0-9]*.*",
+    "regularExpression" : "[0-9][0-9][0-9][0-9]*.*",
     "fileName" : "digit.zip"
   }]
 }
