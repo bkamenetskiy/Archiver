@@ -1,12 +1,7 @@
-import Pojo.Config;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -65,12 +60,6 @@ public class Main {
             System.out.println("Archives not created. Check the correct path to folders.");
         }
 
-
-        // парсинг json
-        File configFile = new File("src/main/resources/config.json");                                          // путь к конфигу
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);                                // игнорирование неизвестных параметров вкл.
-        Config configJSON = mapper.readValue(configFile, Config.class);                                                 // парсинг json
     }
 
 }
