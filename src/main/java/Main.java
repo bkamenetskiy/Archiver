@@ -1,13 +1,16 @@
+import Pojo.Config;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public class Main {
-
-
     public static void main (String[] args) throws IOException {
 
         // хранилище путей к исходным данным
@@ -19,7 +22,7 @@ public class Main {
         // путь к конфигу
         URL xmlUrl = Main.class.getResource("config.xml");
 
-        // пути к исходным данным и результатам
+        // пути к исходным данным и результатам. парсинг xml
         Configurations config = new Configurations();
         XMLConfiguration configXML = null;
 
@@ -42,7 +45,7 @@ public class Main {
         String[] filter = new String[] {"[a-mA-M]*.*", "[n-zN-Z]*.*", "[0-9][0-9][0-9][0-9]*.*"};
         String[] name = new String[] {"am.zip", "nz.zip", "digit.zip"};
 
-        // название папки для хранения архивов. шаблон "yyyy-MM-dd HH-mm"
+        // сервис точного времени. шаблон "yyyy-MM-dd HH-mm-ss"
         TimeService timeService = new TimeService();
         String newDir = timeService.getTime();
 
@@ -62,6 +65,12 @@ public class Main {
             System.out.println("Archives not created. Check the correct path to folders.");
         }
 
+
+        // парсинг json
+        File configFile = new File("src/main/resources/config.json");                                          // путь к конфигу
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);                                // игнорирование неизвестных параметров вкл.
+        Config configJSON = mapper.readValue(configFile, Config.class);                                                 // парсинг json
     }
 
 }
